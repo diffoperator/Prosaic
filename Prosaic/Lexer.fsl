@@ -1,0 +1,60 @@
+﻿{
+module Lexer
+open System
+open Parser
+open Microsoft.FSharp.Text.Lexing
+
+let lexeme lexbuf =
+    LexBuffer<char>.LexemeString lexbuf
+
+let ids = [ ("forall", FORALL);
+            ("true", PREDTRUE);
+            ("false", PREDFALSE)
+          ]
+
+let idsMap = Map.ofList ids
+
+let ident lexbuf tokenText =
+    if (idsMap |> Map.containsKey tokenText) then Map.find tokenText idsMap
+    else ID tokenText
+}
+
+// These are some regular expression definitions
+let digit = ['0'-'9']
+let alpha = ['a'-'z' 'A'-'Z']
+let whitespace = [' ' '\t' ]
+let newline = ('\n' | '\r' '\n')
+let ident = alpha+ (alpha | ['_' '$'])*
+
+let pred_true = 't''r''u''e'
+let pred_false = 'f''a''l''s''e'
+
+let forall = 'f''o''r''a''l''l'
+let exists = 'e''x''i''s''t''s'
+
+rule token = parse
+	| whitespace { token lexbuf }
+	| newline { lexbuf.EndPos <- lexbuf.EndPos.NextLine; token lexbuf; }   
+	// Operators
+	| "&"			{ AND }
+	| "|"			{ OR }
+	| "!"			{ NOT }
+	| "=>"			{ IMPLIES }
+	| "<=>"			{ IFF }
+	| "+"			{ PLUS }
+	| "-"			{ MINUS }
+	| "*"			{ ASTER }
+	| ";"			{ SEMI }
+	// Misc
+	| "("			{ LPAREN }
+	| ")"			{ RPAREN }
+	| ";"			{ SEMI }
+	// Numberic constants
+	| ident			{ ident lexbuf (lexeme lexbuf) }
+	| ['-']?digit+									{ INT32 (Int32.Parse(lexeme lexbuf)) }
+	| ['-']?digit+('.'digit+)?(['e''E']digit+)?		{ FLOAT (Double.Parse(lexeme lexbuf)) }
+	| forall		{ FORALL }
+	| exists		{ EXISTS }
+	// EOF
+	| eof   { EOF }
+
