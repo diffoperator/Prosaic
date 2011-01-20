@@ -60,7 +60,10 @@
     </FsLex>
     <Compile Include="Utils.fs" />
     <Compile Include="Formula.fs" />
+    <Compile Include="BDD.fs" />
+    <Compile Include="Stalmarck.fs" />
     <Compile Include="Program.fs" />
+    <Content Include="README.txt" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="FSharp.PowerPack">

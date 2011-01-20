@@ -5,6 +5,16 @@ open System.Collections.Generic
 open Ast
 open Utils
 
+let rec PrintFormula formula =
+    match formula with
+    | Not (form) -> Console.Write("(! "); PrintFormula form ; Console.Write(")")
+    | And (lform, rform) -> Console.Write("(") ; PrintFormula lform ; Console.Write(" & ") ; PrintFormula rform ; Console.Write(")");
+    | Or (lform, rform) -> Console.Write("(") ; PrintFormula lform ; Console.Write(" | ") ; PrintFormula rform ; Console.Write(")")
+    | Imp (lform, rform) -> Console.Write("( ") ; PrintFormula lform ; Console.Write(" => ") ; PrintFormula rform ; Console.Write(")")
+    | ForAll (str, form) -> Console.Write("(! ") ; PrintFormula form ; Console.Write(")")
+    | Exists (str, form) -> Console.Write("(! ") ; PrintFormula form ; Console.Write(")")
+    | Atom a -> Console.Write(a)
+
 let rec MapFormula f formula = 
     match formula with
     | Not (form) -> Not (MapFormula f form)
@@ -50,7 +60,7 @@ let rec Eval f (values: seq<string*bool>) form =
     | Not (form) -> not (Eval f values form)
     | And (lform, rform) ->(Eval f values lform) && (Eval f values rform)
     | Or (lform, rform) -> (Eval f values lform) || (Eval f values rform)
-    | Imp (prec, accd) -> not((Eval f values prec) || (Eval f values accd))
+    | Imp (prec, accd) -> (not(Eval f values prec)) || (Eval f values accd)
     | Iff (lform, rform) -> (Eval f values lform) = (Eval f values rform)
     | B b -> b
     | Atom a -> snd (values |> Seq.filter (fun e -> (fst e) = a) |> Seq.head)
@@ -72,6 +82,11 @@ let rec IsSatisfiable formula =
 
 let rec IsContradiction formula =
     not (IsTautology formula)
+
+(*TODO
+let TautologyWithCounter formula =
+    (GetTruthTable formula) |> Seq.tryFind
+    *)
 
 let rec SubstAtomWithFormula form atom substForm =
      MapFormula (fun e -> if e = atom then 
@@ -128,6 +143,9 @@ let Negate form =
     | Not p -> p
     | _ -> Formula.Not form
 
+let Valuation form (values: seq<string*bool>) =
+    Eval (fun x -> Boolean.Parse(x)) values form
+
 // NNF -> A statement is said to be in a Negation Normal form if it can be constructed using
 // only binary connectives AND, OR or reduces to T or F. ! is applied only to atomic formulas.
 // Any statement can be converted to NNF (read pg 53, 54)
@@ -152,9 +170,15 @@ let MapToCNF (forms: Formula list) =
 let MapToDNF (forms: Formula list) =
     forms |> List.fold (fun acc e -> Formula.Or (acc, e)) (Formula.B false)
 
-let MakeConjunctionIfSat (forms: Formula list) v =
-    forms |> List.fold (fun acc e -> if v e then 
+let MakeConjunctionIfSatValuation (forms: Formula list) v =
+    forms |> List.fold (fun acc e -> if Valuation e v then 
                                         Formula.And (acc, e) 
                                      else 
                                         Formula.And (Formula.Not (e), acc)) (Formula.B true)
+
+//TODO: Write a function that collects all the valuations that satisfy a formula
+//Also read 2.6 completely
+
+
+
 

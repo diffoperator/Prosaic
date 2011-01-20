@@ -10,6 +10,8 @@ open Ast
 open Lexer
 open Parser
 
+open BDD
+
 let parseText text =
     let lexbuf = Lexing.LexBuffer<char>.FromString text
     try
@@ -18,13 +20,18 @@ let parseText text =
         let pos = lexbuf.EndPos 
         failwithf "Error near line %d, character %d\n" pos.Line pos.Column
 
-let f x = Boolean.Parse(x)
-let a = parseText "p <=> q"
-let pierceslaw = "(((p => q) => q) => p)"
-let formula = match a with 
-              | Prog p -> p |> List.head
-let sim = Formula.ConvertToNNF formula
-(Formula.GetTruthTable formula) |> Seq.iter (fun e -> Console.WriteLine(e.ToString()))
-//let dual = Formula.MakeDual formula         
+let bddBuilder = BDD.BddBuilder (compare)
 
-Console.WriteLine (a.ToString())
+let mutable consoleInput = ""
+while consoleInput <> "quit" do
+    consoleInput <- Console.ReadLine()
+    let formula = match (parseText consoleInput) with
+                    | Prog p -> p |> List.head
+    let builtBDD = bddBuilder.Build formula
+    Console.WriteLine (bddBuilder.ToString (builtBDD))
+    
+    //let sim = Formula.GetTruthTable formula
+    //sim |> Seq.iter (fun e -> Console.WriteLine(e))                     
+
+//(Formula.GetTruthTable formula) |> Seq.iter (fun e -> Console.WriteLine(e.ToString()))
+//let dual = Formula.MakeDual formula         
