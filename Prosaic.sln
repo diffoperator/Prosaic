@@ -12,7 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
 	EndProjectSection
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Fiolo", "Fiolo\Fiolo.fsproj", "{0FB5531C-A649-4CCC-8C7B-DE54C600301E}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Folog", "Folog\Folog.fsproj", "{A08878DC-C25D-4E8D-AF53-1C838C110B63}"
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
@@ -47,16 +47,16 @@ Global
 		{29E25201-EB03-47E6-B4AD-8CEE64B9AACC}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{29E25201-EB03-47E6-B4AD-8CEE64B9AACC}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{29E25201-EB03-47E6-B4AD-8CEE64B9AACC}.Release|x86.ActiveCfg = Release|Any CPU
-		{0FB5531C-A649-4CCC-8C7B-DE54C600301E}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{0FB5531C-A649-4CCC-8C7B-DE54C600301E}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{0FB5531C-A649-4CCC-8C7B-DE54C600301E}.Debug|Mixed Platforms.Build.0 = Debug|x86
-		{0FB5531C-A649-4CCC-8C7B-DE54C600301E}.Debug|x86.ActiveCfg = Debug|x86
-		{0FB5531C-A649-4CCC-8C7B-DE54C600301E}.Debug|x86.Build.0 = Debug|x86
-		{0FB5531C-A649-4CCC-8C7B-DE54C600301E}.Release|Any CPU.ActiveCfg = Release|x86
-		{0FB5531C-A649-4CCC-8C7B-DE54C600301E}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{0FB5531C-A649-4CCC-8C7B-DE54C600301E}.Release|Mixed Platforms.Build.0 = Release|x86
-		{0FB5531C-A649-4CCC-8C7B-DE54C600301E}.Release|x86.ActiveCfg = Release|x86
-		{0FB5531C-A649-4CCC-8C7B-DE54C600301E}.Release|x86.Build.0 = Release|x86
+		{A08878DC-C25D-4E8D-AF53-1C838C110B63}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{A08878DC-C25D-4E8D-AF53-1C838C110B63}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{A08878DC-C25D-4E8D-AF53-1C838C110B63}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{A08878DC-C25D-4E8D-AF53-1C838C110B63}.Debug|x86.ActiveCfg = Debug|x86
+		{A08878DC-C25D-4E8D-AF53-1C838C110B63}.Debug|x86.Build.0 = Debug|x86
+		{A08878DC-C25D-4E8D-AF53-1C838C110B63}.Release|Any CPU.ActiveCfg = Release|x86
+		{A08878DC-C25D-4E8D-AF53-1C838C110B63}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{A08878DC-C25D-4E8D-AF53-1C838C110B63}.Release|Mixed Platforms.Build.0 = Release|x86
+		{A08878DC-C25D-4E8D-AF53-1C838C110B63}.Release|x86.ActiveCfg = Release|x86
+		{A08878DC-C25D-4E8D-AF53-1C838C110B63}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

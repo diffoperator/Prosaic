@@ -62,6 +62,7 @@
     <Compile Include="Formula.fs" />
     <Compile Include="BDD.fs" />
     <Compile Include="Stalmarck.fs" />
+    <Compile Include="Circuit.fs" />
     <Compile Include="Program.fs" />
     <Content Include="README.txt" />
   </ItemGroup>
